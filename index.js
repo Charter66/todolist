@@ -1,12 +1,52 @@
+
+	//loading the page
 window.addEventListener('load', () => {
+	//getting the elements needed from HTML file
 	const form = document.querySelector("#new-task-form");
 	const input = document.querySelector("#new-task-input");
 	const list_el = document.querySelector("#tasks");
+//adding an event listener to our submit button
+
+const button = document.createElement('button');
+
+				// Set the button's text content
+				button.textContent = 'Click me';
+
+				// Set the button's ID attribute
+				button.id = 'my-button';
+
+				// Add a click event listener to the button
+				button.addEventListener('click', function() {
+					task.innerHTML = JSON.parse(localStorage.getItem('task'));
+				});
+
+				// Add the button to the document
+				document.body.appendChild(button);
 
 	form.addEventListener('submit', (e) => {
-		e.preventDefault();
+       //prevent default koo ke stisnes kopceto da ne refreshire
+		//tava e inputo so treba da napraam da ode u local storage
+		let task = input.value;
+		if(localStorage.getItem('task') == null){
 
-		const task = input.value;
+			localStorage.setItem('task', '[]');
+		}
+		const oldData= JSON.parse(localStorage.getItem('task'));
+		oldData.push(task);
+		e.preventDefault()
+		localStorage.setItem('task',JSON.stringify(oldData));
+
+				
+	
+		//making a key to store multiple times evrytime with different key in local storage
+		// const timestamp = Date.now();
+		// localStorage.setItem('task', task);
+		// e.preventDefault();
+		// localStorage.getItem("task",task)
+
+		// const storedTasks = Object.entries(localStorage);
+
+		// console.log(storedTasks)
 
 		const task_el = document.createElement('div');
 		task_el.classList.add('task');
